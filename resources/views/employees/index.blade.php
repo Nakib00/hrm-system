@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Employees</h1>
+    <h1 class="mb-4">Employees</h1>
 
     @if(session('success'))
     <div class="alert alert-success mt-2">
@@ -11,12 +11,17 @@
     @endif
 
     <div class="mb-3 d-flex justify-content-between align-items-center">
-        <a href="{{ route('employees.create') }}" class="btn btn-primary">Create Employee</a>
+        <div>
+            <a href="{{ route('employees.create') }}" class="btn btn-primary">Create Employee</a>
+            
+            <a href="{{ route('departments.index') }}" class="btn btn-secondary ms-2">Departments</a>
+            <a href="{{ route('skills.index') }}" class="btn btn-secondary ms-2">Skills</a>
+        </div>
 
         <div class="d-flex align-items-center">
-            <label class="me-2 mb-0">Filter by Department:</label>
-            <select id="departmentFilter" class="form-select">
-                <option value="">All</option>
+            <label class="me-2 mb-0 fw-bold">Filter by Department:</label>
+            <select id="departmentFilter" class="form-select" style="width: auto;">
+                <option value="">All Departments</option>
                 @foreach($departments as $department)
                 <option value="{{ $department->id }}">{{ $department->name }}</option>
                 @endforeach
@@ -24,14 +29,14 @@
         </div>
     </div>
 
-    <table class="table table-bordered" id="employeesTable">
-        <thead>
+    <table class="table table-bordered table-striped" id="employeesTable">
+        <thead class="table-dark">
             <tr>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Department</th>
                 <th>Skills</th>
-                <th>Actions</th>
+                <th style="width: 200px;">Actions</th>
             </tr>
         </thead>
         <tbody id="employeesTbody">
@@ -46,7 +51,7 @@
                     @endforeach
                 </td>
                 <td>
-                    <a href="{{ route('employees.show', $employee) }}" class="btn btn-sm btn-info">View</a>
+                    <a href="{{ route('employees.show', $employee) }}" class="btn btn-sm btn-info text-white">View</a>
                     <a href="{{ route('employees.edit', $employee) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="d-inline">
                         @csrf @method('DELETE')
@@ -89,7 +94,7 @@
                             <td>${employee.department ? employee.department.name : ''}</td>
                             <td>${skillsHtml}</td>
                             <td>
-                                <a href="/employees/${employee.id}" class="btn btn-sm btn-info">View</a>
+                                <a href="/employees/${employee.id}" class="btn btn-sm btn-info text-white">View</a>
                                 <a href="/employees/${employee.id}/edit" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="/employees/${employee.id}" method="POST" class="d-inline">
                                     @csrf

@@ -27,14 +27,12 @@
             @endif
 
             <main class="py-4">
-                {{-- Support for Blade Views --}}
-                @yield('content') 
-                
-                {{-- Support for Breeze Components (keep if needed) --}}
                 {{ $slot ?? '' }}
+
+                @yield('content')
             </main>
         </div>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         
         @stack('scripts')

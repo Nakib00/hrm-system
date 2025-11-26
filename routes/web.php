@@ -18,11 +18,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('departments', DepartmentController::class)->only(['index', 'create', 'store']);
     Route::resource('skills', SkillController::class)->only(['index', 'create', 'store']);
 
-
     Route::get('/employees/filter', [EmployeeController::class, 'filter'])->name('employees.filter');
     Route::get('/employees/check-email', [EmployeeController::class, 'checkEmail'])->name('employees.checkEmail');
-
-
+    
     Route::resource('employees', EmployeeController::class);
 });
 
